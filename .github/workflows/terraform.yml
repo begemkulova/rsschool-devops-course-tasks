@@ -6,7 +6,7 @@ on:
       destroy:
         description: 'Should we destroy the Terraform resources?'
         required: false
-        default: 'false'  # Use a string for compatibility
+        default: false  
         type: boolean  
     secrets:  
       AWS_ACCESS_KEY_ID:
