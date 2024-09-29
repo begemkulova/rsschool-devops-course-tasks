@@ -39,7 +39,7 @@ jobs:
       - name: terraform-check
         run: |
           cd 1task
-          terraform init
+          terraform init -reconfigure
           terraform fmt
 
       - name: terraform-plan
@@ -48,13 +48,11 @@ jobs:
           terraform plan
 
       - name: terraform-apply
-        if: ${{ inputs.apply == 'true' }}
         run: |
           cd 1task
           terraform apply -auto-approve
 
       - name: terraform-destroy
-        if: ${{ inputs.destroy == 'true' }}
         run: |
           cd 1task
           terraform destroy -auto-approve
