@@ -1,3 +1,2 @@
 # rsschool-devops-course-tasks
-Owner: Bekaiym Egemkulova
-@begemkulova
+- Prepared by Bekaiym Egemkulova @begemkulova.
