@@ -1,7 +1,7 @@
 #.\1task\.github\workflows\terraform.yml
 name: Reusable Terraform Workflow
 on:
-  workflow_dispatch:  # -> manual execution from the Actions tab
+  # workflow_dispatch:  # -> manual execution from the Actions tab
   workflow_call:  # this workflow can be reused
     inputs:
       apply:
