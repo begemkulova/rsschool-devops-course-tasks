@@ -1,11 +1,12 @@
 name: Reusable Terraform Workflow
+
 on:
   workflow_call: 
     inputs: 
       destroy:
         description: 'Should we destroy the Terraform resources?'
         required: false
-        default: false 
+        default: 'false'  # Use a string for compatibility
         type: boolean  
     secrets:  
       AWS_ACCESS_KEY_ID:
@@ -49,7 +50,6 @@ jobs:
       - name: Terraform Check
         run: |
           cd 1task
-          terraform init -reconfigure
           terraform fmt 
 
   terraform-plan:
@@ -62,7 +62,6 @@ jobs:
       - name: Terraform Plan
         run: |
           cd 1task
-          terraform init -reconfigure
           terraform plan
 
   terraform-apply:
@@ -75,13 +74,11 @@ jobs:
       - name: Terraform Apply
         run: |
           cd 1task
-          terraform init -reconfigure
           terraform apply -auto-approve
 
   terraform-destroy:
     runs-on: ubuntu-latest
-    needs: terraform-apply
-    if: ${{ inputs.destroy == true }}  # Run if 'destroy' is true
+    if: ${{ inputs.destroy == 'true' }}  # Run if 'destroy' input is true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -89,8 +86,8 @@ jobs:
       - name: Terraform Destroy
         run: |
           cd 1task
-          terraform init -reconfigure
           terraform destroy -auto-approve
+
 
 
 
