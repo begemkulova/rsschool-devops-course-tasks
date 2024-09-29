@@ -1,10 +1,11 @@
+#.\1task\.github\workflows\terraform.yml
 name: Reusable Terraform Workflow
 on:
   workflow_dispatch:  # -> manual execution from the Actions tab
   workflow_call:  # this workflow can be reused
     inputs:
       apply:
-        required: false
+        required: true
         type: boolean
       destroy:
         required: false
@@ -42,11 +43,11 @@ jobs:
         run: terraform plan
 
       - name: Terraform Apply
-        if: ${{ inputs.apply == 'true' }}
+        if: ${{ inputs.apply }}  # This will evaluate as true if input is "true"
         run: terraform apply -auto-approve
 
       - name: Terraform Destroy
-        if: ${{ inputs.destroy == 'true' }}
+        if: ${{ inputs.destroy }}  # This will evaluate as true if input is "true"
         run: terraform destroy -auto-approve
 
 

@@ -1,3 +1,4 @@
+#.\.github\workflows\terraform.yml
 name: Main Workflow
 
 on:
@@ -7,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    uses: ./1task/.github/workflows/terraform.yml  # the reusable workflow
+    uses: ./1task/.github/workflows/terraform.yml@main  # the reusable workflow
     with:
       apply: true
       destroy: false
