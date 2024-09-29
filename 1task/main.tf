@@ -14,11 +14,3 @@ resource "aws_s3_bucket_versioning" "bucket_versioning" {
   }
 }
 
-terraform {
-  backend "s3" {
-    bucket = "begemkulov-rs-terraform-state"
-    key    = "terraform.tfstate"
-    region = "us-east-1"
-  }
-}
-

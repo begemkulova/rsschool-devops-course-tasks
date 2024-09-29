@@ -47,18 +47,30 @@ jobs:
       - name: cd 
         run: cd 1task
 
-      - name: Terraform Init
-        run: cd 1task && terraform init -reconfigure
+      - name: Terraform Init and Apply (Create Bucket)
+        run: |
+          cd 1task
+          terraform init
+          terraform apply -auto-approve
 
-      - name: Terraform Plan
-        run: cd 1task && terraform plan
+      - name: Configure Backend and Plan
+        run: |
+          cd 1task/iam
+          terraform init -reconfigure  # Re-initialize with the backend configuration
+          terraform plan
 
       - name: Terraform Apply
-        if: ${{ inputs.apply }}  # This will evaluate as true if input is "true"
-        run: cd 1task && terraform apply -auto-approve
+        if: ${{ inputs.apply == 'true' }}
+        run: |
+          cd 1task/iam
+          terraform apply -auto-approve
 
       - name: Terraform Destroy
-        if: ${{ inputs.destroy }}  # This will evaluate as true if input is "true"
-        run: cd 1task && terraform destroy -auto-approve
+        if: ${{ inputs.destroy == 'true' }}
+        run: |
+          cd 1task
+          terraform destroy -auto-approve
+          cd 1task/iam
+          terraform destroy -auto-approve
 
 
