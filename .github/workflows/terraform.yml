@@ -41,24 +41,24 @@ jobs:
       - name: ls-la 
         run: ls -la
 
-      - name: git clone 
-        run: git clone https://github.com/begemkulova/rsschool-devops-course-tasks.git
+      - name: ls -la 1task
+        run: ls -la 1task
 
       - name: cd 
         run: cd 1task
 
       - name: Terraform Init
-        run: terraform init -reconfigure
+        run: cd 1task && terraform init -reconfigure
 
       - name: Terraform Plan
-        run: terraform plan
+        run: cd 1task && terraform plan
 
       - name: Terraform Apply
         if: ${{ inputs.apply }}  # This will evaluate as true if input is "true"
-        run: terraform apply -auto-approve
+        run: cd 1task && terraform apply -auto-approve
 
       - name: Terraform Destroy
         if: ${{ inputs.destroy }}  # This will evaluate as true if input is "true"
-        run: terraform destroy -auto-approve
+        run: cd 1task && terraform destroy -auto-approve
 
 
