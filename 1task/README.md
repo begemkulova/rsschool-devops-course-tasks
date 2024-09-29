@@ -55,14 +55,13 @@ The reusable workflow defines jobs to initialize, check, plan, apply, and destro
 ## Directory Structure
 
 The `1task` directory contains the following files for your Terraform configuration:
-1task
-|-- README.md
-|-- backend.tf
-|-- data.tf
-|-- iamrole.tf
-|-- main.tf
-|-- terraform.tfvars
-`-- variables.tf
+-- README.md
+-- backend.tf
+-- data.tf
+-- iamrole.tf
+-- main.tf
+-- terraform.tfvars 
+-- variables.tf
 
 
 ## Requirements
