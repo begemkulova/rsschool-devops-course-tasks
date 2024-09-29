@@ -2,6 +2,27 @@ name: Reusable Terraform Workflow
 on:
   workflow_dispatch:  # Manual execution from the Actions tab
   workflow_call:  
+    inputs:
+      init:
+        description: 'Should we apply the Terraform changes?'
+        required: false
+        default: 'false'
+      check:
+        description: 'Should we destroy the Terraform resources?'
+        required: false
+        default: 'false' 
+      plan:
+        description: 'Should we apply the Terraform changes?'
+        required: false
+        default: 'false'
+      apply:
+        description: 'Should we apply the Terraform changes?'
+        required: false
+        default: 'false'
+      destroy:
+        description: 'Should we destroy the Terraform resources?'
+        required: false
+        default: 'false' 
     secrets:  
       AWS_ACCESS_KEY_ID:
         required: true
