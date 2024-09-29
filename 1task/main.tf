@@ -16,9 +16,9 @@ resource "aws_s3_bucket_versioning" "bucket_versioning" {
 
 terraform {
   backend "s3" {
-    bucket = var.s3_bucket_name
-    key    = var.terraform_backend_key
-    region = var.aws_region
+    bucket = "begemkulov-rs-terraform-state"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
   }
 }
 
