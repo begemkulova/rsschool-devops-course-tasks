@@ -57,6 +57,7 @@ jobs:
       - name: terraform-plan
         run: |
           cd 1task
+          terraform init -reconfigure
           terraform plan
 
   terraform-apply:
@@ -81,6 +82,7 @@ jobs:
       - name: terraform-apply
         run: |
           cd 1task
+          terraform init -reconfigure
           terraform apply -auto-approve
 
   terraform-destroy:
@@ -105,6 +107,7 @@ jobs:
       - name: terraform-destroy
         run: |
           cd 1task
+          terraform init -reconfigure
           terraform destroy -auto-approve
 
 
