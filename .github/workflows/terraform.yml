@@ -1,12 +1,11 @@
 name: Reusable Terraform Workflow
 on:
-  workflow_dispatch:  # Manual execution from the Actions tab
   workflow_call: 
     inputs: 
       destroy:
         description: 'Should we destroy the Terraform resources?'
-        required: true
-        default: 'false' 
+        required: false
+        default: false 
         type: boolean  
     secrets:  
       AWS_ACCESS_KEY_ID:
@@ -79,7 +78,7 @@ jobs:
   terraform-destroy:
     runs-on: ubuntu-latest
     needs: terraform-apply
-    if: ${{ github.event.inputs.destroy == 'true' }}  # Run if 'destroy' is true
+    if: ${{ inputs.destroy == true }}  # Run if 'destroy' is true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
