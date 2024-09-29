@@ -19,7 +19,7 @@ on:
 jobs:
   terraform-init:
     runs-on: ubuntu-latest
-    needs: setup  # Depend on the setup job
+    # needs: setup  # Depend on the setup job
     steps:
       - name: Terraform Init
         run: |
