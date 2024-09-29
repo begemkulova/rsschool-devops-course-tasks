@@ -7,27 +7,27 @@ on:
         description: 'Should we initialize Terraform?'
         required: false
         default: 'false'
-        type: boolean
+        type: string  # Change to string
       check:
         description: 'Should we format the Terraform files?'
         required: false
         default: 'false' 
-        type: boolean
+        type: string  # Change to string
       plan:
         description: 'Should we create a Terraform plan?'
         required: false
         default: 'false'
-        type: boolean
+        type: string  # Change to string
       apply:
         description: 'Should we apply the Terraform changes?'
         required: false
         default: 'false'
-        type: boolean
+        type: string  # Change to string
       destroy:
         description: 'Should we destroy the Terraform resources?'
         required: false
         default: 'false' 
-        type: boolean  
+        type: string  # Change to string
     secrets:  
       AWS_ACCESS_KEY_ID:
         required: true
