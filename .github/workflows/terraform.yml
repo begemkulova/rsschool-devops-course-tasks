@@ -36,41 +36,27 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: pwd 
-        run: pwd
-      - name: ls-la 
-        run: ls -la
-
-      - name: ls -la 1task
-        run: ls -la 1task
-
-      - name: cd 
-        run: cd 1task
-
-      - name: Terraform Init and Apply (Create Bucket)
+      - name: terraform-check
         run: |
           cd 1task
           terraform init
-          terraform apply -auto-approve
+          terraform fmt
 
-      - name: Configure Backend and Plan
+      - name: terraform-plan
         run: |
-          cd 1task/iam
-          terraform init -reconfigure  # Re-initialize with the backend configuration
+          cd 1task
           terraform plan
 
-      - name: Terraform Apply
+      - name: terraform-apply
         if: ${{ inputs.apply == 'true' }}
         run: |
-          cd 1task/iam
+          cd 1task
           terraform apply -auto-approve
 
-      - name: Terraform Destroy
+      - name: terraform-destroy
         if: ${{ inputs.destroy == 'true' }}
         run: |
           cd 1task
-          terraform destroy -auto-approve
-          cd 1task/iam
           terraform destroy -auto-approve
 
 
