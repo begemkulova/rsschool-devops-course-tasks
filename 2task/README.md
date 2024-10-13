@@ -1,7 +1,7 @@
 # Documentation - Task 2: Basic Infrastructure Configuration 
 ### Student:  Bekaiym Egemkulova.
 
-This project is a part of the RS School tasks. This Terraform configuration provisions a Virtual Private Cloud (VPC) with public and private subnets, security groups, and EC2 instances in AWS. It includes a bastion host in the public subnet and a main application host in the private subnet. The configuration also sets up NAT gateways, Internet Gateways, Route Tables, and Network ACLs. Additionally, a GitHub Actions workflow is included to automate the deployment process via Reusable Workflow.
+The project is a part of the RS School tasks. This Terraform configuration provisions a Virtual Private Cloud (VPC) with public and private subnets, security groups, and EC2 instances in AWS. It includes a bastion host in the public subnet and a main application host in the private subnet. The configuration also sets up NAT gateways, Internet Gateways, Route Tables, and Network ACLs. Additionally, a GitHub Actions workflow is included to automate the deployment process via Reusable Workflow.
 
 ## GitHub Secrets
 
