@@ -10,7 +10,7 @@ Before running the workflows, make sure to set the following GitHub Secrets in y
 - **AWS_ACCESS_KEY_ID**: Your AWS access key ID.
 - **AWS_SECRET_ACCESS_KEY**: Your AWS secret access key.
 - **AWS_REGION**: The AWS region to deploy resources in.
-- **AWS_ACCOUNT_ID**: Your AWS account ID (optional but recommended).
+- **AWS_ACCOUNT_ID**: Your AWS account ID (optional but recommended). /
 
 ## GitHub Actions Workflow
 
