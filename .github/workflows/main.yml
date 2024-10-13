@@ -1,22 +1,13 @@
 name: Main Workflow
 
 on:
-  workflow_dispatch:
-    inputs:
-      destroy:
-        description: 'Should we destroy the Terraform resources?'
-        required: false
-        default: false 
-        type: boolean     
   push:
     branches:
       - main
 
 jobs:
   terraform-deploy:
-    uses: ./.github/workflows/terraform.yml # the reusable workflow
-    with: 
-      destroy: ${{ github.event.inputs.destroy == 'true' }}
+    uses: ./.github/workflows/2task.yml # the reusable workflow
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
