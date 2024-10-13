@@ -55,7 +55,7 @@ variable "single_nat_gateway" {
 variable "project" {
   type        = string
   description = "Project name"
-  default     = "task2-project"
+  default     = "task2"
 }
 
 variable "environment" {
