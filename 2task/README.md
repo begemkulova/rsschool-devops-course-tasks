@@ -12,7 +12,7 @@ Before running the workflows, make sure to set the following GitHub Secrets in y
 - **AWS_REGION**: The AWS region to deploy resources in.
 - **AWS_ACCOUNT_ID**: Your AWS account ID (optional but recommended). 
 
-## GitHub Actions Workflow
+## GitHub Actions Workflow.
 
 ### Main Workflow
 
