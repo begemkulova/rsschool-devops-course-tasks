@@ -1,141 +1,141 @@
-name: Reusable Terraform Workflow
+# name: Reusable Terraform Workflow
 
-on:
-  workflow_call: 
-    inputs: 
-      destroy:
-        description: 'Should we destroy the Terraform resources?'
-        required: false
-        default: false  
-        type: boolean  
-    secrets:  
-      AWS_ACCESS_KEY_ID:
-        required: true
-      AWS_SECRET_ACCESS_KEY:
-        required: true
-      AWS_REGION:
-        required: true
+# on:
+#   workflow_call: 
+#     inputs: 
+#       destroy:
+#         description: 'Should we destroy the Terraform resources?'
+#         required: false
+#         default: false  
+#         type: boolean  
+#     secrets:  
+#       AWS_ACCESS_KEY_ID:
+#         required: true
+#       AWS_SECRET_ACCESS_KEY:
+#         required: true
+#       AWS_REGION:
+#         required: true
 
-jobs:
-  terraform-init:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+# jobs:
+#   terraform-init:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.6.0
+#       - name: Setup Terraform
+#         uses: hashicorp/setup-terraform@v2
+#         with:
+#           terraform_version: 1.6.0
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v2
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Terraform Init
-        run: |
-          cd 1task
-          terraform init -reconfigure
+#       - name: Terraform Init
+#         run: |
+#           cd 1task
+#           terraform init -reconfigure
 
-  terraform-check:
-    runs-on: ubuntu-latest
-    needs: terraform-init 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+#   terraform-check:
+#     runs-on: ubuntu-latest
+#     needs: terraform-init 
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.6.0
+#       - name: Setup Terraform
+#         uses: hashicorp/setup-terraform@v2
+#         with:
+#           terraform_version: 1.6.0
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      - name: Terraform Check
-        run: |
-          cd 1task
-          terraform init -reconfigure
-          terraform fmt 
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v2
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ${{ secrets.AWS_REGION }}
+#       - name: Terraform Check
+#         run: |
+#           cd 1task
+#           terraform init -reconfigure
+#           terraform fmt 
 
-  terraform-plan:
-    runs-on: ubuntu-latest
-    needs: terraform-check
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+#   terraform-plan:
+#     runs-on: ubuntu-latest
+#     needs: terraform-check
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.6.0
+#       - name: Setup Terraform
+#         uses: hashicorp/setup-terraform@v2
+#         with:
+#           terraform_version: 1.6.0
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      - name: Terraform Plan
-        run: |
-          cd 1task
-          terraform init -reconfigure
-          terraform plan
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v2
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ${{ secrets.AWS_REGION }}
+#       - name: Terraform Plan
+#         run: |
+#           cd 1task
+#           terraform init -reconfigure
+#           terraform plan
 
-  terraform-apply:
-    runs-on: ubuntu-latest
-    needs: terraform-plan
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+#   terraform-apply:
+#     runs-on: ubuntu-latest
+#     needs: terraform-plan
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.6.0
+#       - name: Setup Terraform
+#         uses: hashicorp/setup-terraform@v2
+#         with:
+#           terraform_version: 1.6.0
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      - name: Terraform Apply
-        run: |
-          cd 1task
-          terraform init -reconfigure
-          terraform apply -auto-approve
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v2
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ${{ secrets.AWS_REGION }}
+#       - name: Terraform Apply
+#         run: |
+#           cd 1task
+#           terraform init -reconfigure
+#           terraform apply -auto-approve
 
-  terraform-destroy:
-    runs-on: ubuntu-latest
-    needs: terraform-apply  # Ensure apply runs first
-    if: ${{ inputs.destroy == 'true' }}  # Run if 'destroy' input is true
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+#   terraform-destroy:
+#     runs-on: ubuntu-latest
+#     needs: terraform-apply  # Ensure apply runs first
+#     if: ${{ inputs.destroy == 'true' }}  # Run if 'destroy' input is true
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.6.0
+#       - name: Setup Terraform
+#         uses: hashicorp/setup-terraform@v2
+#         with:
+#           terraform_version: 1.6.0
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      - name: Terraform Destroy
-        run: |
-          cd 1task
-          terraform init -reconfigure
-          terraform destroy -auto-approve
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v2
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ${{ secrets.AWS_REGION }}
+#       - name: Terraform Destroy
+#         run: |
+#           cd 1task
+#           terraform init -reconfigure
+#           terraform destroy -auto-approve
 
 
 

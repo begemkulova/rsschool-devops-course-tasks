@@ -1,6 +1,6 @@
 # Terraform Project
 
-This repository contains a Terraform project for managing AWS resources using GitHub Actions for CI/CD. The setup includes workflows for initializing, planning, applying, and optionally destroying Terraform resources.
+This repository contains a Terraform project for managing AWS resources using GitHub Actions for CI/CD. The setup includes workflows for initializing, planning, applying, and optionally destroying Terraform resources..
 
 ## GitHub Secrets
 
