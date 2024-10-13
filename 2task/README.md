@@ -14,7 +14,7 @@ Before running the workflows, make sure to set the following GitHub Secrets in y
 
 ## GitHub Actions Workflow.
 
-### Main Workflow...
+### Main Workflow....
 
 The main workflow triggers on push to the `main` branch or through manual dispatch. It runs the reusable Terraform workflow defined in `main.yml`.
 
