@@ -13,10 +13,8 @@
 #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 #       AWS_REGION: ${{ secrets.AWS_REGION }}
 #       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-
-
+#H
 name: Main Workflow
-
 on:
   push:
     branches:
@@ -36,10 +34,6 @@ jobs:
 
       - name: Terraform Init
         run: terraform init 
-        working-directory: ./2task 
-
-      - name: Terraform Fmt
-        run: terraform fmt
         working-directory: ./2task 
 
       - name: Terraform Plan
