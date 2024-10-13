@@ -22,9 +22,12 @@ jobs:
           terraform_version: 1.0.11
       - name: Terraform Init
         run: terraform init -reconfigure
+        working-directory: ./2task 
       - name: Terraform Fmt
         run: terraform fmt
+        working-directory: ./2task 
       - name: Terraform Plan
         run: terraform plan
       - name: Terraform Apply
         run: terraform apply -auto-approve
+        working-directory: ./2task 
