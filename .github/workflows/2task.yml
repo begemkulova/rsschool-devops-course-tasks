@@ -1,0 +1,30 @@
+name: Reusable Terraform Workflow
+on:
+  workflow_call: 
+    secrets:  
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+      AWS_REGION:
+        required: true
+
+jobs:
+  terraform:
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.11
+      - name: Terraform Init
+        run: terraform init -reconfigure
+      - name: Terraform Fmt
+        run: terraform fmt
+      - name: Terraform Plan
+        run: terraform plan
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
