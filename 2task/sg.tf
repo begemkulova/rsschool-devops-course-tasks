@@ -2,7 +2,7 @@
 resource "aws_security_group" "bastion_sg" {
   name        = "${var.project}-bastion-sg"
   description = "Security group for Bastion Host"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = aws_vpc.vpc.id
 
   dynamic "ingress" {
     for_each = [
@@ -39,7 +39,7 @@ resource "aws_security_group" "bastion_sg" {
 resource "aws_security_group" "main_sg" {
   name        = "${var.project}-main-sg"
   description = "Security group for Main Host"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = aws_vpc.vpc.id
 
   dynamic "ingress" {
     for_each = [
@@ -47,13 +47,13 @@ resource "aws_security_group" "main_sg" {
         from_port   = 22
         to_port     = 22
         protocol    = "tcp"
-        cidr_blocks = [aws_vpc.main.cidr_block]
+        cidr_blocks = [aws_vpc.vpc.cidr_block]
       },
       {
         from_port   = -1
         to_port     = -1
         protocol    = "icmp"
-        cidr_blocks = [aws_vpc.main.cidr_block]
+        cidr_blocks = [aws_vpc.vpc.cidr_block]
       }
     ]
     content {

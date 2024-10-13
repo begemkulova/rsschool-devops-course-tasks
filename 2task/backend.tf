@@ -1,7 +1,6 @@
 provider "aws" {
   region = var.region
 }
-
 terraform {
   backend "s3" {
     bucket = "begemkulov-rs-terraform-state"
