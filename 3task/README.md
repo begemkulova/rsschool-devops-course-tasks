@@ -49,6 +49,7 @@ project: Project name used in tags (default: task3).
 ## Backend Configuration
 The Terraform state is stored remotely in my S3 bucket (use your own bucket name):
 Bucket: begemkulov-rs-terraform-state
+.
 
   
 
