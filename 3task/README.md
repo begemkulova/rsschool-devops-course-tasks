@@ -11,6 +11,7 @@ Before running the workflows, make sure to set the following GitHub Secrets in y
 - **AWS_SECRET_ACCESS_KEY**: Your AWS secret access key.
 - **AWS_REGION**: The AWS region to deploy resources in.
 - **AWS_ACCOUNT_ID**: Your AWS account ID (optional but recommended). 
+- **AWS_EC2_PRIVATE_KEY**: Your AWS's Key Pair (optional but recommended). 
 
 ## Prerequisites
 
