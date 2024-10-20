@@ -1,18 +1,4 @@
-# name: Main Workflow
-
-# on:
-#   push:
-#     branches:
-#       - main
-# jobs:
-#   terraform-deploy:
-#     uses: ./.github/workflows/2task.yml # Reusable Terraform Workflow
-#     secrets:
-#       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#       AWS_REGION: ${{ secrets.AWS_REGION }}
-#       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-
+# Task 3 - Workflow: K8s Cluster Configuration and Creation
 name: Main Workflow
 on:
   push:
@@ -33,31 +19,24 @@ jobs:
 
       - name: Terraform Init
         run: terraform init 
-        working-directory: ./2task 
+        working-directory: ./3task 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
 
       - name: Terraform Plan
-        run: terraform plan
-        working-directory: ./2task 
+        run: terraform plan -var="private_key=${{ secrets.AWS_EC2_PRIVATE_KEY }}"
+        working-directory: ./3task 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
-        working-directory: ./2task 
+        run: terraform apply -auto-approve -var="private_key=${{ secrets.AWS_EC2_PRIVATE_KEY }}"
+        working-directory: ./3task 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
-
-
-
- 
-
-
-

@@ -1,50 +1,45 @@
-name: Reusable Terraform Workflow
+# Task 2 - Workflow
+########################
 
-on:
-  workflow_call: 
-    secrets:  
-      AWS_ACCESS_KEY_ID:
-        required: true
-      AWS_SECRET_ACCESS_KEY:
-        required: true
-      AWS_REGION:
-        required: true
-      AWS_ACCOUNT_ID:
-        required: true
+# name: Main Workflow
+# on:
+#   push:
+#     branches:
+#       - main
 
+# jobs:
+#   terraform-deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-jobs:
-  terraform:
-    name: Terraform
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+#       - name: Setup Terraform
+#         uses: hashicorp/setup-terraform@v1
+#         with:
+#           terraform_version: 1.0.11
 
-      - name: Configure AWS Credentials
-        run: |
-          echo "[default]" > ~/.aws/credentials
-          echo "aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
-          echo "aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+#       - name: Terraform Init
+#         run: terraform init 
+#         working-directory: ./2task 
+#         env:
+#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           AWS_REGION: ${{ secrets.AWS_REGION }}
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 1.0.11
+#       - name: Terraform Plan
+#         run: terraform plan
+#         working-directory: ./2task 
+#         env:
+#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           AWS_REGION: ${{ secrets.AWS_REGION }}
 
-      - name: Terraform Init
-        run: terraform init 
-        working-directory: ./2task 
-
-      - name: Terraform Fmt
-        run: terraform fmt
-        working-directory: ./2task 
-
-      - name: Terraform Plan
-        run: terraform plan
-        working-directory: ./2task 
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
-        working-directory: ./2task 
+#       - name: Terraform Apply
+#         run: terraform apply -auto-approve
+#         working-directory: ./2task 
+#         env:
+#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           AWS_REGION: ${{ secrets.AWS_REGION }}
 
