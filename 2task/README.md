@@ -19,13 +19,8 @@ Before running the workflows, make sure to set the following GitHub Secrets in y
 The main workflow triggers on push to the `main` branch or through manual dispatch. It runs the reusable Terraform workflow defined in `main.yml`.
 
 #### Job: terraform-deploy
-- **uses**: Calls the reusable workflow located in `./.github/workflows/main.yml`.
-- **with**: Passes the destroy input value to the reusable workflow.
-- **secrets**: Passes AWS credentials and region from GitHub Secrets.
+- **uses**: Calls the main workflow located in `./.github/workflows/main.yml`.
 
-### Reusable Terraform Workflow
-
-The reusable workflow defines jobs to initialize, check, plan, apply, and etc  located in `./.github/workflows/2task.yml`..
 
 #### Jobs
 1. **terraform-init**: 
