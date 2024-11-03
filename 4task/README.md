@@ -188,3 +188,4 @@ Based on the steps, the resources should be removed, to check it run the followi
 kubectl get pods
 kubectl get svc
 ```
+End.
