@@ -4,7 +4,7 @@ data "aws_availability_zones" "available" {}
 # Get the most recent AMI for Ubuntu 22.04 (Jammy) in the AWS region: us-east-1
 data "aws_ami" "ubuntu_ami" {
   most_recent = true
-  owners      = ["099720109477"]
+  owners      = ["099720109477"] # Official Ubuntu account
 
   filter {
     name   = "name"
@@ -16,3 +16,4 @@ data "aws_ami" "ubuntu_ami" {
     values = ["hvm"]
   }
 }
+
