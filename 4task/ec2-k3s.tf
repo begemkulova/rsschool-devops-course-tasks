@@ -41,31 +41,32 @@ resource "aws_instance" "master" {
 
   user_data = <<-EOF
                 #!/bin/bash
-                set -ex
+                echo "test"
+                # set -ex
                 
-                # Install necessary packages
-                apt-get update -y
-                apt-get install -y curl apt-transport-https
+                # # Install necessary packages
+                # apt-get update -y
+                # apt-get install -y curl apt-transport-https
 
-                # Install k3s
-                curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644 --tls-san $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
-                hostnamectl set-hostname "master-node"
+                # # Install k3s
+                # curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644 --tls-san $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
+                # hostnamectl set-hostname "master-node"
 
-                # Configure Kubernetes
-                mkdir -p ~/.kube
-                sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
-                sudo chown $(id -u):$(id -g) ~/.kube/config
+                # # Configure Kubernetes
+                # mkdir -p ~/.kube
+                # sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+                # sudo chown $(id -u):$(id -g) ~/.kube/config
 
-                # Wait for k3s to be ready
-                until kubectl get nodes; do sleep 30; done
+                # # Wait for k3s to be ready
+                # until kubectl get nodes; do sleep 30; done
 
-                # Create Jenkins namespace
-                kubectl create namespace jenkins
+                # # Create Jenkins namespace
+                # kubectl create namespace jenkins
 
-                # Install Jenkins using Helm
-                helm repo add jenkins https://charts.jenkins.io
-                helm repo update
-                helm install jenkins jenkins/jenkins --namespace jenkins --set controller.serviceType=LoadBalancer
+                # # Install Jenkins using Helm
+                # helm repo add jenkins https://charts.jenkins.io
+                # helm repo update
+                # helm install jenkins jenkins/jenkins --namespace jenkins --set controller.serviceType=LoadBalancer
                 EOF
 
   tags = {
