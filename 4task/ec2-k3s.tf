@@ -41,6 +41,7 @@ resource "aws_instance" "master" {
 
   user_data = <<-EOF
               #!/bin/bash
+              curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644 --tls-san $(curl http://169.254.169.254/latest/meta-data/public-ipv4)
               hostnamectl set-hostname "master-node"
               sudo apt-get update -y
               sudo apt-get install -y curl apt-transport-https
@@ -167,8 +168,7 @@ resource "aws_instance" "master" {
                 --set controller.serviceType=LoadBalancer \
                 --set persistence.enabled=true \
                 --set persistence.size=8Gi \
-                --set persistence.existingClaim=jenkins-pvc \
-                --set 'controller.installPlugins={cloudbees-credentials,git,workflow-aggregator,jacoco,configuration-as-code}'
+                --set persistence.existingClaim=jenkins-pvc 
 
               # Wait for Jenkins pod to be ready
               while [[ $(kubectl get pods -n jenkins -l app.kubernetes.io/component=jenkins-controller -o jsonpath='{.items[*].status.containerStatuses[*].ready}' 2>/dev/null) != "true" ]]; do

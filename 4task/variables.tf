@@ -67,7 +67,7 @@ variable "environment" {
 variable "instance_type" {
   type        = string
   description = "AWS EC2 instance type"
-  default     = "t2.small"
+  default     = "t3.small"
 }
 
 # variable "token" {
